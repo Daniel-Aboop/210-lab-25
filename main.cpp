@@ -23,11 +23,23 @@ int main() {
     vector<string> racer1;
     set<string> racer2;
     list<string> racer3;
+    // using these to hold my results from the races from vector->set->list
+    vector<int> reading;
+    vector<int> sorting;
+    vector<int> inserting;
+    vector<int> deleting;
+
     string temp;
-    
+    // using this to get the size of the file.
+    int size=0;
+    auto start=high_resolution_clock::now();
     while(file>>temp){
         racer1.push_back(temp);
+        size++;
     }
+    auto end=high_resolution_clock::now();
+    auto duration=duration_cast<microseconds>(end-start);
+    
     temp="";
     while(file>>temp){
         racer2.insert(temp);
