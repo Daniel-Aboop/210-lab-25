@@ -4,6 +4,8 @@
         "xtree": "cpp",
         "list": "cpp",
         "iostream": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "xutility": "cpp",
+        "ios": "cpp"
     }
 }

@@ -9,15 +9,13 @@
 #include <string>
 #include <fstream>
 #include <algorithm>
+#include <iomanip>
 using namespace std;
 using namespace std::chrono;
-//C:\\Users\\hope4\\Desktop\\COMSC 210 Work\\210-lab-25\\codes.txt
-
-void printvector(vector<int>& pass);
-
+void printvector(vector<int>& pass,string name);
 
 int main() {
-    ifstream file("C:\\Users\\hope4\\Desktop\\COMSC 210 Work\\210-lab-25\\codes.txt");
+    ifstream file("File path here");
     if(!file.is_open()){
         cout<<"failed to open file"<<endl;
         return 1;
@@ -133,24 +131,29 @@ int main() {
     auto its=racer3.begin();
     advance(its,racer3.size()/2);
     racer3.erase(its);
+    end=high_resolution_clock::now();
+    duration=duration_cast<microseconds>(end-start);
+    timelist=duration.count();
+    deleting.push_back(timelist);
 
     //Outputting the resulst of the races
-    cout<<"Operation     Vector     Set     List"<<endl;
-    cout<<"Reading:  "; printvector(reading);
-    cout<<endl;
-    cout<<"Sorting:  "; printvector(sorting);
-    cout<<endl;
-    cout<<"Inserting:  "; printvector(inserting);
-    cout<<endl;
-    cout<<"Deleting:   "; printvector(deleting);
+    cout<<left<<setw(12)<<"Operation"<<right<<setw(10)<<"Vector"
+    <<right<<setw(10)<<"Set"<<right<<setw(10)<<"List"<<endl;
+    printvector(reading,"Read");
+    printvector(sorting,"Sort");
+    printvector(inserting,"Insert");
+    printvector(deleting,"Delete");
+
     file.close();
     return 0;
 }
 
-void printvector(vector<int>& pass){
+void printvector(vector<int>& pass,string name){
+    cout<<left<<setw(12)<<name<<" ";
     for(int temp: pass){
-        cout<<temp<<" ";
+        cout<<right<<setw(10)<<temp;
     }
+    cout<<endl;
 }
 /* syntax examples:
 auto start = high_resolution_clock::now()
