@@ -48,7 +48,7 @@ int main() {
     reading.push_back(timevector);
     file.clear();
     file.seekg(0);
-    
+
     start=high_resolution_clock::now();
     while(file>>temp){
         racer2.insert(temp);
@@ -59,6 +59,7 @@ int main() {
     reading.push_back(timeset);
     file.clear();
     file.seekg(0);
+
     start=high_resolution_clock::now();
     while(file>>temp){
         racer3.push_back(temp);
@@ -75,6 +76,7 @@ int main() {
     duration=duration_cast<microseconds>(end-start);
     timevector=duration.count();
     sorting.push_back(timevector);
+
     //set already sorts
     sorting.push_back(-1);
     start=high_resolution_clock::now();
@@ -109,8 +111,28 @@ int main() {
     timelist=duration.count();
     inserting.push_back(timelist);
 
-
     //Deleting Race
+    start=high_resolution_clock::now();
+    int middle=racer1.size()/2;
+    racer1.erase(racer1.begin()+middle);
+    end=high_resolution_clock::now();
+    duration=duration_cast<microseconds>(end-start);
+    timevector=duration.count();
+    deleting.push_back(timevector);
+
+    start=high_resolution_clock::now();
+    auto it=racer2.begin();
+    advance(it,racer2.size()/2);
+    racer2.erase(it);
+    end=high_resolution_clock::now();
+    duration=duration_cast<microseconds>(end-start);
+    timeset=duration.count();
+    deleting.push_back(timeset);
+
+    start=high_resolution_clock::now();
+    auto its=racer3.begin();
+    advance(its,racer3.size()/2);
+    racer3.erase(its);
 
     //Outputting the resulst of the races
     cout<<"Operation     Vector     Set     List"<<endl;
@@ -119,6 +141,8 @@ int main() {
     cout<<"Sorting:  "; printvector(sorting);
     cout<<endl;
     cout<<"Inserting:  "; printvector(inserting);
+    cout<<endl;
+    cout<<"Deleting:   "; printvector(deleting);
     file.close();
     return 0;
 }
