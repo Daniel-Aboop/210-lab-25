@@ -11,6 +11,10 @@
 using namespace std;
 using namespace std::chrono;
 //C:\\Users\\hope4\\Desktop\\COMSC 210 Work\\210-lab-25\\codes.txt
+
+void printvector(vector<int>& pass);
+
+
 int main() {
     ifstream file("C:\\Users\\hope4\\Desktop\\COMSC 210 Work\\210-lab-25\\codes.txt");
     if(!file.is_open()){
@@ -29,15 +33,18 @@ int main() {
     vector<int> inserting;
     vector<int> deleting;
     string temp;
+
+    // Reading races
     auto start=high_resolution_clock::now();
     while(file>>temp){
         racer1.push_back(temp);
     }
     auto end=high_resolution_clock::now();
     auto duration=duration_cast<microseconds>(end-start);
-    file.clear();
     int timevector=duration.count();
-    cout<<timevector<<endl;
+    reading.push_back(timevector);
+    file.clear();
+    file.seekg(0);
     start=high_resolution_clock::now();
     while(file>>temp){
         racer2.insert(temp);
@@ -45,7 +52,9 @@ int main() {
     end=high_resolution_clock::now();
     duration=duration_cast<microseconds>(end-start);
     int timeset=duration.count();
-    cout<<timeset<<endl;
+    reading.push_back(timeset);
+    file.clear();
+    file.seekg(0);
     start=high_resolution_clock::now();
     while(file>>temp){
         racer3.push_back(temp);
@@ -53,11 +62,29 @@ int main() {
     end=high_resolution_clock::now();
     duration=duration_cast<microseconds>(end-start);
     int timelist=duration.count();
-    cout<<timelist<<endl;
+    reading.push_back(timelist);
+
+    //Sorting Races
+
+    //Inserting Races
+
+    //Deleting Races
+
+    //Outputting the resulst of the races
+    cout<<"Operation     Vector     List     Set"<<endl;
+    cout<<"Reading:  "; printvector(reading);
+
     file.close();
     return 0;
 }
 
+void printvector(vector<int>& pass){
+    for(int temp: pass){
+        cout<<temp<<" ";
+    }
+
+
+}
 /* syntax examples:
 auto start = high_resolution_clock::now()
 auto end = high_resolution_clock::now()

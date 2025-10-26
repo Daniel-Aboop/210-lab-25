@@ -3,6 +3,7 @@
         "chrono": "cpp",
         "xtree": "cpp",
         "list": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "vector": "cpp"
     }
 }
