@@ -37,7 +37,7 @@ int main() {
     int timevector=0;
     int timeset=0;
     int timelist=0;
-    // Reading races
+    // Reading race
     auto start=high_resolution_clock::now();
     while(file>>temp){
         racer1.push_back(temp);
@@ -67,7 +67,7 @@ int main() {
     timelist=duration.count();
     reading.push_back(timelist);
 
-    //Sorting Races
+    //Sorting Race
     start=high_resolution_clock::now();
     sort(racer1.begin(),racer1.end());
     end=high_resolution_clock::now();
@@ -83,15 +83,24 @@ int main() {
     timelist=duration.count();
     sorting.push_back(timelist);
 
-    //Inserting Races
+    //Inserting Race
+    int place=racer1.size()/2;
+    start=high_resolution_clock::now();
+    racer1.insert(racer1.begin()+place,"TESTCODE");
+    end=high_resolution_clock::now();
+    duration=duration_cast<microseconds>(end-start);
+    timevector=duration.count();
+    inserting.push_back(timevector);
 
-    //Deleting Races
+    //Deleting Race
 
     //Outputting the resulst of the races
-    cout<<"Operation     Vector     List     Set"<<endl;
+    cout<<"Operation     Vector     Set     List"<<endl;
     cout<<"Reading:  "; printvector(reading);
     cout<<endl;
     cout<<"Sorting:  "; printvector(sorting);
+    cout<<endl;
+    cout<<"Inserting:  "; printvector(inserting);
     file.close();
     return 0;
 }
