@@ -8,6 +8,7 @@
 #include <set>
 #include <string>
 #include <fstream>
+#include <algorithm>
 using namespace std;
 using namespace std::chrono;
 //C:\\Users\\hope4\\Desktop\\COMSC 210 Work\\210-lab-25\\codes.txt
@@ -27,13 +28,15 @@ int main() {
     vector<string> racer1;
     set<string> racer2;
     list<string> racer3;
-    //using these to hold my results from the races from vector->set->list
+    //using these to hold my results from the races from vector->set->list and hold certain points of data
     vector<int> reading;
     vector<int> sorting;
     vector<int> inserting;
     vector<int> deleting;
     string temp;
-
+    int timevector=0;
+    int timeset=0;
+    int timelist=0;
     // Reading races
     auto start=high_resolution_clock::now();
     while(file>>temp){
@@ -41,7 +44,7 @@ int main() {
     }
     auto end=high_resolution_clock::now();
     auto duration=duration_cast<microseconds>(end-start);
-    int timevector=duration.count();
+    timevector=duration.count();
     reading.push_back(timevector);
     file.clear();
     file.seekg(0);
@@ -51,7 +54,7 @@ int main() {
     }
     end=high_resolution_clock::now();
     duration=duration_cast<microseconds>(end-start);
-    int timeset=duration.count();
+    timeset=duration.count();
     reading.push_back(timeset);
     file.clear();
     file.seekg(0);
@@ -61,10 +64,24 @@ int main() {
     }
     end=high_resolution_clock::now();
     duration=duration_cast<microseconds>(end-start);
-    int timelist=duration.count();
+    timelist=duration.count();
     reading.push_back(timelist);
 
     //Sorting Races
+    start=high_resolution_clock::now();
+    sort(racer1.begin(),racer1.end());
+    end=high_resolution_clock::now();
+    duration=duration_cast<microseconds>(end-start);
+    timevector=duration.count();
+    sorting.push_back(timevector);
+    //set already sorts
+    sorting.push_back(-1);
+    start=high_resolution_clock::now();
+    racer3.sort();
+    end=high_resolution_clock::now();
+    duration=duration_cast<microseconds>(end-start);
+    timelist=duration.count();
+    sorting.push_back(timelist);
 
     //Inserting Races
 
@@ -73,7 +90,8 @@ int main() {
     //Outputting the resulst of the races
     cout<<"Operation     Vector     List     Set"<<endl;
     cout<<"Reading:  "; printvector(reading);
-
+    cout<<endl;
+    cout<<"Sorting:  "; printvector(sorting);
     file.close();
     return 0;
 }
@@ -82,8 +100,6 @@ void printvector(vector<int>& pass){
     for(int temp: pass){
         cout<<temp<<" ";
     }
-
-
 }
 /* syntax examples:
 auto start = high_resolution_clock::now()
