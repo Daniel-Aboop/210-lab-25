@@ -48,6 +48,7 @@ int main() {
     reading.push_back(timevector);
     file.clear();
     file.seekg(0);
+    
     start=high_resolution_clock::now();
     while(file>>temp){
         racer2.insert(temp);
@@ -91,6 +92,23 @@ int main() {
     duration=duration_cast<microseconds>(end-start);
     timevector=duration.count();
     inserting.push_back(timevector);
+
+    start=high_resolution_clock::now();
+    racer2.insert("TESTCODE");
+    end=high_resolution_clock::now();
+    duration=duration_cast<microseconds>(end-start);
+    timeset=duration.count();
+    inserting.push_back(timeset);
+    
+    start=high_resolution_clock::now();
+    auto iter=racer3.begin();
+    advance(iter,racer3.size()/2);
+    racer3.insert(iter,"TESTCODE");
+    end=high_resolution_clock::now();
+    duration=duration_cast<microseconds>(end-start);
+    timelist=duration.count();
+    inserting.push_back(timelist);
+
 
     //Deleting Race
 
